@@ -9,7 +9,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "../config/site";
 import * as React from "react";
 
 interface MagicLinkEmailProps {

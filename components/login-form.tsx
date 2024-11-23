@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type LoginFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -17,7 +18,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
   const loginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      await signIn("google", { callbackUrl: "/dashboard" });
+      await signIn("google", { callbackUrl: "http://localhost:3000/dashboard" });
     } catch (error) {
       console.error(error);
     } finally {
@@ -88,6 +89,12 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
         )}
         Google
       </Button>
+      <div className="text-sm text-center">
+        <span>Don’t have an account? </span>
+        <Link href="/signup" className="font-semibold text-blue-500 hover:underline">
+          Create Account
+        </Link>
+      </div>
     </div>
   );
 }

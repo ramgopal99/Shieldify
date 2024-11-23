@@ -1,6 +1,5 @@
 import { Resend } from "resend";
-import SubscriptionEmail from "@/emails/subscription-email";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "../config/site";
 import * as React from "react";
 
 if (!process.env.RESEND_API_KEY) {
@@ -36,25 +35,3 @@ export async function sendEmail<T extends Record<string, unknown>>({
   }
 }
 
-// Specific email functions
-export async function sendSubscriptionEmail(
-  email: string,
-  name: string | null,
-  type: "created" | "updated" | "cancelled"
-) {
-  const subject = {
-    created: "Welcome to Your Subscription!",
-    updated: "Your Subscription Has Been Updated",
-    cancelled: "Your Subscription Has Been Cancelled",
-  }[type];
-
-  return sendEmail({
-    to: email,
-    subject,
-    template: SubscriptionEmail,
-    props: {
-      name: name || "there",
-      type,
-    },
-  });
-}

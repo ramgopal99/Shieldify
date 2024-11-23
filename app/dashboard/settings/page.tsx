@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ProfileForm } from "@/components/forms/profile-form";
-import { EmailPreferencesForm } from "@/components/forms/email-preferences-form";
 import { DeleteAccountForm } from "@/components/forms/delete-account-form";
 
 export default async function SettingsPage() {
@@ -32,17 +31,6 @@ export default async function SettingsPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Email Preferences</CardTitle>
-            <CardDescription>
-              Manage your email notification preferences
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EmailPreferencesForm user={session.user} />
-          </CardContent>
-        </Card>
 
         <Card>
           <CardHeader>

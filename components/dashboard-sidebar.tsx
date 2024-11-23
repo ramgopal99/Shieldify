@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   HomeIcon,
-  CreditCard,
   Settings,
   Menu,
   LogOut,
@@ -13,6 +12,8 @@ import {
   HelpCircle,
   Github,
   Users,
+  UserPen,
+  Mails,
 } from "lucide-react";
 import {
   Sidebar,
@@ -42,16 +43,6 @@ const primaryNavItems = [
     title: "Dashboard",
     href: "/dashboard",
     icon: HomeIcon,
-  },
-  {
-    title: "Teams",
-    href: "/dashboard/teams",
-    icon: Users,
-  },
-  {
-    title: "Billing",
-    href: "/dashboard/billing",
-    icon: CreditCard,
   },
   {
     title: "Settings",
@@ -138,25 +129,27 @@ export function DashboardSidebar() {
         <SidebarFooter className="border-t p-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2 px-2"
-              >
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src={session?.user?.image ?? undefined} />
-                  <AvatarFallback>
-                    {session?.user?.name?.[0]?.toUpperCase() ?? "U"}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col flex-1 text-left">
-                  <span className="text-sm font-medium">
-                    {session?.user?.name ?? "User"}
-                  </span>
-                  <span className="text-xs text-muted-foreground truncate max-w-[150px]">
-                    {session?.user?.email}
-                  </span>
-                </div>
-              </Button>
+              <div>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-2 px-2"
+                >
+                  <Avatar className="h-6 w-6">
+                    <AvatarImage src={session?.user?.image ?? undefined} />
+                    <AvatarFallback>
+                      {session?.user?.name?.[0]?.toUpperCase() ?? "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col flex-1 text-left">
+                    <span className="text-sm font-medium">
+                      {session?.user?.name ?? "User"}
+                    </span>
+                    <span className="text-xs text-muted-foreground truncate max-w-[150px]">
+                      {session?.user?.email}
+                    </span>
+                  </div>
+                </Button>
+              </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[200px]">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -186,8 +179,10 @@ export function DashboardSidebar() {
         </SidebarFooter>
       </Sidebar>
       <SidebarTrigger className="fixed left-4 top-3 lg:hidden">
-        <Button variant="outline" size="icon">
-          <Menu className="h-5 w-5" />
+        <Button variant="outline" size="icon" asChild>
+          <div>
+            <Menu className="h-5 w-5" />
+          </div>
         </Button>
       </SidebarTrigger>
     </>

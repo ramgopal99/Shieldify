@@ -7,15 +7,6 @@ import { siteConfig } from "@/config/site";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { BiLogoTypescript } from "react-icons/bi";
 import { SiPrisma, SiStripe } from "react-icons/si";
-import { PayButton } from "@/components/ui/pay-button";
-import { Check } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 const techStack = [
   {
@@ -160,99 +151,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Powered By Section */}
-      <section className="py-12 sm:py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-8 text-center text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            Powered By
-          </h2>
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {techStack.map((tech) => (
-              <div
-                key={tech.name}
-                className="flex items-center gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              >
-                <div className="text-primary text-3xl">{tech.icon}</div>
-                <div>
-                  <h3 className="font-medium">{tech.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {tech.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-16 sm:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-              Simple, transparent pricing
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Choose the plan that's right for you
-            </p>
-          </div>
-
-          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {pricingPlans.map((plan) => (
-              <Card
-                key={plan.name}
-                className={`flex flex-col ${
-                  plan.popular ? "border-primary shadow-lg" : ""
-                }`}
-              >
-                <CardHeader>
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-2xl font-bold">
-                      {plan.name}
-                    </CardTitle>
-                    {plan.popular && (
-                      <Badge variant="default">Most Popular</Badge>
-                    )}
-                  </div>
-                  <CardDescription className="mt-2">
-                    {plan.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-5xl font-extrabold">
-                      ${plan.price}
-                    </span>
-                    <span className="ml-1 text-xl text-muted-foreground">
-                      /month
-                    </span>
-                  </div>
-                  <ul className="mt-6 space-y-4">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-center">
-                        <Check className="mr-2 h-5 w-5 text-primary" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8">
-                    <PayButton
-                      priceId={plan.priceId}
-                      amount={plan.price}
-                      showAmount={false}
-                      className={`w-full ${
-                        plan.popular
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : ""
-                      }`}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

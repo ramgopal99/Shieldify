@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { CommandMenu } from "@/components/command-menu";
-import { UserButton } from "@/components/user-button";
 import { Separator } from "@/components/ui/separator";
 
 export default async function DashboardLayout({
@@ -28,7 +27,6 @@ export default async function DashboardLayout({
             <div className="ml-auto flex items-center gap-2">
               <ModeToggle />
               <Separator orientation="vertical" className="h-6" />
-              <UserButton />
             </div>
           </div>
         </header>
