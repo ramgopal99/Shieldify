@@ -10,10 +10,9 @@ import {
   User,
   Bell,
   HelpCircle,
+  MailCheck,
+  LockKeyhole,
   Github,
-  Users,
-  UserPen,
-  Mails,
 } from "lucide-react";
 import {
   Sidebar,
@@ -45,6 +44,21 @@ const primaryNavItems = [
     icon: HomeIcon,
   },
   {
+    title: "Email Validation",
+    href: "/dashboard/emailchecker",
+    icon: MailCheck,
+  },
+  {
+    title: "Password Strength Checker",
+    href: "/dashboard/passwordchecker",
+    icon: LockKeyhole,
+  },
+  {
+    title: "GitHub Vulnerability Checker",
+    href: "/dashboard/githubvulchecker",
+    icon: Github,
+  },  
+  {
     title: "Settings",
     href: "/dashboard/settings",
     icon: Settings,
@@ -54,16 +68,11 @@ const primaryNavItems = [
 const secondaryNavItems = [
   {
     title: "Help & Support",
-    href: "https://docs.example.com",
+    href: "http://localhost:3000/dashboard",
     icon: HelpCircle,
     external: true,
   },
-  {
-    title: "GitHub",
-    href: siteConfig.links.github,
-    icon: Github,
-    external: true,
-  },
+
 ];
 
 export function DashboardSidebar() {
