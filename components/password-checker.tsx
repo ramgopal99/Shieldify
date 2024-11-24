@@ -13,16 +13,16 @@ export function PasswordChecker() {
 
   const checkPassword = () => {
     let score = 0
-    if (password.length >= 8) score += 30
-    if (/[A-Z]/.test(password)) score += 20
+    if (password.length >= 8) score += 10
+    if (/[A-Z]/.test(password)) score += 10
     if (/[a-z]/.test(password)) score += 10
-    if (/\d/.test(password)) score += 20
+    if (/\d/.test(password)) score += 10
     if (/[@$!%*?&]/.test(password)) score += 20
 
     if (score < 40) {
       setStrength('Weak')
       setStrengthPercentage(score)
-    } else if (score < 80) {
+    } else if (score < 50) {
       setStrength('Medium')
       setStrengthPercentage(score)
     } else {
@@ -48,7 +48,7 @@ export function PasswordChecker() {
           </label>
           <Input
             id="password"
-            type="password"
+            type="text"
             placeholder="Type a powerful password..."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
