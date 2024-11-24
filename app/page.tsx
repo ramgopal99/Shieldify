@@ -1,82 +1,118 @@
+"use client"
+
+import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { RiNextjsLine, RiTailwindCssFill } from "react-icons/ri";
-import { FaReact } from "react-icons/fa";
+import { RiShieldKeyholeLine, RiNewspaperLine, RiLockPasswordLine, RiCodeSSlashLine } from "react-icons/ri";
 import { siteConfig } from "@/config/site";
 import { RainbowButton } from "@/components/ui/rainbow-button";
-import { BiLogoTypescript } from "react-icons/bi";
-import { SiPrisma, SiStripe } from "react-icons/si";
-
+import { motion } from "framer-motion";
 
 export default function HomePage() {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative">
-        {/* Background decoration */}
-        <div className="absolute inset-0 -z-10 mx-0 max-w-none overflow-hidden">
-          <div className="absolute left-1/2 top-0 ml-[-38rem] h-[25rem] w-[81.25rem] dark:[mask-image:linear-gradient(white,transparent)]">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#36b49f] to-[#DBFF75] opacity-40 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-[#36b49f]/30 dark:to-[#DBFF75]/30 dark:opacity-100">
-              <svg
-                aria-hidden="true"
-                className="absolute inset-x-0 inset-y-[-50%] h-[200%] w-full skew-y-[-18deg] fill-black/40 stroke-black/50 mix-blend-overlay dark:fill-white/2.5 dark:stroke-white/5"
-              >
-                <defs>
-                  <pattern
-                    id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
-                    width="72"
-                    height="56"
-                    patternUnits="userSpaceOnUse"
-                    x="-12"
-                    y="4"
-                  >
-                    <path d="M.5 56V.5H72" fill="none" />
-                  </pattern>
-                </defs>
-                <rect
-                  width="100%"
-                  height="100%"
-                  strokeWidth="0"
-                  fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-gray-100 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
 
-        {/* Hero content */}
-        <div className="container mx-auto px-4 py-20 sm:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="outline" className="mb-6 animate-fade-in">
-              <span className="font-semibold">New Release</span> - v1.0.0 is
-              here
-            </Badge>
-            <h1 className="mb-10 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-6xl font-bold tracking-tight text-transparent dark:from-gray-100 dark:to-gray-800 sm:text-7xl">
-              Launch your SaaS faster than ever
-            </h1>
-            <p className="mb-10 text-xl text-muted-foreground">
-              {siteConfig.description} Built with Next.js 14, React, Prisma, and
-              Stripe.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Link href="/login">
-                <RainbowButton>
-                  Let's Start Building 🚀
-                  {/* <ArrowRight className="ml-2 h-4 w-4" /> */}
-                </RainbowButton>
-              </Link>
-              {/* <Link href="/docs">
-                <RainbowButton className="bg-white">
-                  View Documentation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </RainbowButton>
-              </Link> */}
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="relative container mx-auto px-4 py-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <Badge variant="outline" className="mb-6 bg-white/20 text-white">
+            <span className="font-semibold">Stay Protected</span> - Your Cybersecurity Hub
+          </Badge>
+          <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-7xl text-white">
+            Secure Your Digital World
+          </h1>
+          <p className="mb-10 text-xl text-gray-300 max-w-2xl mx-auto">
+            {siteConfig.description} Empowering you with the latest cybersecurity news, tools, and insights to protect your digital assets.
+          </p>
+          <Link href="/dashboard">
+            <RainbowButton className="text-lg px-8 py-3">Explore Our Tools 🛡️</RainbowButton>
+          </Link>
+        </motion.div>
 
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
+        >
+          <FeatureCard
+            icon={<RiNewspaperLine className="w-12 h-12 text-teal-400" />}
+            title="Cybersecurity News"
+            description="Stay informed with the latest cybersecurity threats, breaches, and best practices."
+            onHover={() => setHoveredCard("news")}
+            isHovered={hoveredCard === "news"}
+          />
+          <FeatureCard
+            icon={<RiShieldKeyholeLine className="w-12 h-12 text-teal-400" />}
+            title="Email Breach Checker"
+            description="Verify if your email has been compromised in known data breaches."
+            onHover={() => setHoveredCard("email")}
+            isHovered={hoveredCard === "email"}
+          />
+          <FeatureCard
+            icon={<RiLockPasswordLine className="w-12 h-12 text-teal-400" />}
+            title="Password Strength Checker"
+            description="Assess the strength of your passwords and get recommendations for improvement."
+            onHover={() => setHoveredCard("password")}
+            isHovered={hoveredCard === "password"}
+          />
+          <FeatureCard
+            icon={<RiCodeSSlashLine className="w-12 h-12 text-teal-400" />}
+            title="Code Vulnerability Checker"
+            description="Scan your code for potential security vulnerabilities and get remediation advice."
+            onHover={() => setHoveredCard("code")}
+            isHovered={hoveredCard === "code"}
+          />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl font-bold mb-6 text-white">
+            Why Choose Us?
+          </h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            With cutting-edge tools and real-time insights, we ensure your digital safety is always a priority. Discover, explore, and secure with confidence.
+          </p>
+        </motion.div>
+        </div>
     </div>
+  );
+}
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  onHover: () => void;
+  isHovered: boolean;
+}
+
+function FeatureCard({ icon, title, description, onHover, isHovered }: FeatureCardProps) {
+  return (
+    <motion.div 
+      className="bg-gray-800 backdrop-blur-lg p-6 rounded-lg shadow-lg transition-all duration-300 transform"
+      whileHover={{ scale: 1.05 }}
+      onHoverStart={onHover}
+      animate={{
+        boxShadow: isHovered ? "0 0 25px 5px rgba(20, 184, 166, 0.5)" : "0 0 0 0 rgba(0, 0, 0, 0)"
+      }}
+    >
+      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-teal-400/20 mb-4">
+        {icon}
+      </div>
+      <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
+      <p className="text-gray-300">{description}</p>
+    </motion.div>
   );
 }
